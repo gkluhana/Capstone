@@ -89,6 +89,7 @@ for i = 1: sim_idx-1
   if  ~mod(i,10)
       fprintf('Grabbing Frame %d \n',i)
   end
+      set
       F(i) = getframe(gcf) ;
 %   drawnow
   hold off
@@ -96,7 +97,7 @@ end
 
 
      % create the video writer with 1 fps
-  writerObj = VideoWriter('Figures/myVideo.avi');
+  writerObj = VideoWriter('myVideo2.avi');
   writerObj.FrameRate = 10;
   % set the seconds per image
 % open the video writer
@@ -105,7 +106,7 @@ open(writerObj);
 for i=1:length(F)
     % convert the image to a frame
     frame = F(i) ;    
-    frame.cdata = imresize(frame.cdata,2);
+    frame.cdata = imresize(frame.cdata,1.5);
     writeVideo(writerObj, frame);
 end
 % close the writer object
