@@ -1,10 +1,10 @@
 function f=spread(F,X)
 global h N Nx Ny dtheta Nb;
-
+global num_flappers
 c=dtheta/(h*h);
 f=zeros(Nx,Ny,2);
 
-for k=1:Nb
+for k=1:Nb*num_flappers
   s=X(k,:)/h;
   i=floor(s);
   r=s-i;

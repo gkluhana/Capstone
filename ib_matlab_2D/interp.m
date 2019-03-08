@@ -1,9 +1,10 @@
 function U=interp(u,X)
 global Nb h;
 global N Nx Ny;
+global num_flappers
 U=zeros(Nb,2);
 
-for k=1:Nb
+for k=1:Nb*num_flappers
   s=X(k,:)/h;
   i=floor(s);
   r=s-i;
