@@ -89,6 +89,7 @@ for i = 1: sim_idx-1
   if  ~mod(i,10)
       fprintf('Grabbing Frame %d \n',i)
   end
+      set(gcf,'Position',[0 0 1500 500])
       F(i) = getframe(gcf) ;
 %   drawnow
   hold off
@@ -105,7 +106,6 @@ open(writerObj);
 for i=1:length(F)
     % convert the image to a frame
     frame = F(i) ;    
-    frame.cdata = imresize(frame.cdata,2);
     writeVideo(writerObj, frame);
 end
 % close the writer object
