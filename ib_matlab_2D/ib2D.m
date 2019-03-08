@@ -20,6 +20,7 @@ Trest = T(:,2);
 snaptime = 50 ; %take snapshot after every snaptime 
 sim_idx = 1;
 simData = cell(ceil(clockmax/snaptime),4);
+num_frames = 0;
 for clock=1:clockmax
     time = clock*dt;
     XX=X+(dt/2)*interp(u,X);
@@ -40,7 +41,10 @@ for clock=1:clockmax
   if ~mod(clock,snaptime)
   vorticity=(u(ixp,:,2)-u(ixm,:,2)-u(:,iyp,1)+u(:,iym,1))/(2*h);
   simData(sim_idx,:) = [{vorticity}, {X} , {T} ,{time} ];
-  fprintf('Saving SimData at Time %d \n ',time)
+       if ~mod(clock,snaptime*10)
+          num_frames = num_frames + 10;
+          fprintf('Saved %d frames in SimData at Time %d \n ',num_frames,time)
+       end
   sim_idx= sim_idx+1;
   end
 %   vorticity=(u(ixp,:,2)-u(ixm,:,2)-u(:,iyp,1)+u(:,iym,1))/(2*h);
@@ -68,8 +72,7 @@ end
 
 %% PLOT Dumped Data
 
-for i = 1: 50
-%   figure(1)  
+for i = 1: sim_idx-1
   vorticity = simData{i,1};
   X = simData{i,2};
   T = simData{i,3};
@@ -102,7 +105,7 @@ open(writerObj);
 for i=1:length(F)
     % convert the image to a frame
     frame = F(i) ;    
-    frame.cdata = imresize(frame.cdata,1.5);
+    frame.cdata = imresize(frame.cdata,3);
     writeVideo(writerObj, frame);
 end
 % close the writer object
