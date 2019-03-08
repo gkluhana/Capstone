@@ -106,6 +106,7 @@ open(writerObj);
 for i=1:length(F)
     % convert the image to a frame
     frame = F(i) ;    
+
     writeVideo(writerObj, frame);
 end
 % close the writer object
