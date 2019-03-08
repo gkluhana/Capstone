@@ -1,3 +1,4 @@
+    % convert the image to a frame
 % ib2D.m
 % This script is the main program.
 close all
@@ -89,7 +90,11 @@ for i = 1: sim_idx-1
   if  ~mod(i,10)
       fprintf('Grabbing Frame %d \n',i)
   end
+<<<<<<< HEAD
+      set
+=======
       set(gcf,'Position',[0 0 1500 500])
+>>>>>>> 4d77804ea6230346daf37d2523a81923b564157c
       F(i) = getframe(gcf) ;
 %   drawnow
   hold off
@@ -97,7 +102,7 @@ end
 
 
      % create the video writer with 1 fps
-  writerObj = VideoWriter('Figures/myVideo.avi');
+  writerObj = VideoWriter('myVideo2.avi');
   writerObj.FrameRate = 10;
   % set the seconds per image
 % open the video writer
@@ -106,7 +111,10 @@ open(writerObj);
 for i=1:length(F)
     % convert the image to a frame
     frame = F(i) ;    
-
+<<<<<<< HEAD
+    frame.cdata = imresize(frame.cdata,1.5);
+=======
+>>>>>>> 4d77804ea6230346daf37d2523a81923b564157c
     writeVideo(writerObj, frame);
 end
 % close the writer object
