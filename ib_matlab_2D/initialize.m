@@ -91,17 +91,17 @@ end
 set(gcf,'double','on')
 % contour(xgrid,ygrid,vorticity,values)
 % hold on
-for i = 1:num_flappers
-    plot(X(:,1),X(:,2),'ko')
-    hold on
-    for i =1:num_flappers
-     plot(T((i-1)*Nb+1:i*Nb,1),T((i-1)*Nb+1:i*Nb,2),'r-')
-    end
-end
-axis([0,Lx,0,Ly])
-caxis(valminmax)
-axis equal
+%for i = 1:num_flappers
+%    plot(X(:,1),X(:,2),'ko')
+%    hold on
+%    for i =1:num_flappers
+%     plot(T((i-1)*Nb+1:i*Nb,1),T((i-1)*Nb+1:i*Nb,2),'r-')
+%    end
+%end
+%axis([0,Lx,0,Ly])
+%caxis(valminmax)
+%axis equal
 % axis manual
-drawnow
-hold off
+%drawnow
+%hold off
 
