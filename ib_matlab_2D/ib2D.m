@@ -78,14 +78,21 @@ for i = 1: sim_idx-1
   X = simData{i,2};
   T = simData{i,3};
   time = simData{i,4};
-  contour(xgrid,ygrid,vorticity,values);
-  hold on
+  if i == 500 
+  dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
+  values= (-10*dvorticity):dvorticity:(10*dvorticity);
+  valminmax=[min(values),max(values)];
+  end
   plot(X(:,1),X(:,2),'kx')
+  hold on
+  if i> 500
+  contour(xgrid,ygrid,vorticity,values);
+  caxis(valminmax)
+  end
   for j =1:num_flappers
      plot(T((j-1)*Nb+1:j*Nb,1),T((j-1)*Nb+1:j*Nb,2),'r-')
   end
   axis([0,Lx,0,Ly])
-  caxis(valminmax)
   axis equal
   if  ~mod(i,10)
       fprintf('Grabbing Frame %d \n',i)

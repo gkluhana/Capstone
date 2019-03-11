@@ -66,10 +66,10 @@ end
 
 u=zeros(Nx,Ny,2);
 
-for j1=0:(Nx-1)
-  x=j1*h;
-  u(j1+1,:,2)=sin(2*pi*x/L);
-end
+%for j1=0:(Nx-1)
+ % x=j1*h;
+ % u(j1+1,:,2)=sin(2*pi*x/L);
+%end
 
 %%Don't calculate right now if no vorticity at the start
 
