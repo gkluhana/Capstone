@@ -16,8 +16,8 @@ for i = 1:sim_idx-1
   end
   plot(X(:,1),X(:,2),'kx')
   hold on
-  for j =1:num_flappers
-     plot(T((j-1)*Nb+1:j*Nb,1),T((j-1)*Nb+1:j*Nb,2),'r-')
+  for j =1:param.num_flappers
+     plot(T((j-1)*param.Nb+1:j*param.Nb,1),T((j-1)*param.Nb+1:j*param.Nb,2),'r-')
   end
   axis equal manual
   xlim([0 3]);
@@ -25,12 +25,12 @@ for i = 1:sim_idx-1
   if i> 1000 
   caxis(valminmax)
   end
-  title(['Time: ' num2str(time,4) ', dt:' num2str(dt) ', h:' num2str(h), ', Nx-Ny:', num2str(Nx) '-' num2str(Ny) ', Nb-202' ', Flappers:' num2str(num_flappers)])  
+  title(['Time: ' num2str(time,4) ', dt:' num2str(param.dt) ', h:' num2str(param.h), ', Nx-Ny:', num2str(param.Nx) '-' num2str(param.Ny) ', Nb-202' ', Flappers:' num2str(param.num_flappers)])  
   if  ~mod(i,100)
       fprintf('Grabbing Frame %d \n',i)
   end
-      set(gcf,'Position',[0 0 1500 500])
-      F(i) = getframe(gcf) ;
+      set(gcf,'Position',[0 0 1500 500]);
+      Frames(i) = getframe(gcf) ;
 %   drawnow
   hold off
 end
@@ -42,9 +42,9 @@ end
 % open the video writer
 open(writerObj);
 % write the frames to the video
-for i=1:length(F)
+for i=1:length(Frames)
     % convert the image to a frame
-    frame = F(i) ;
+    frame = Frames(i) ;
     writeVideo(writerObj, frame);
 end
 % close the writer object

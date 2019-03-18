@@ -1,8 +1,8 @@
-function X = airfoil(L,xcenter,ycenter,w)
-
-global Nb
-global dtheta
-
+function X = airfoil(L,xcenter,ycenter,w,Nb,dtheta)
+% 
+% global Nb
+% global dtheta
+% 
 
 %Generate Unit Circle centered at origin
 for k=0:(Nb-1)

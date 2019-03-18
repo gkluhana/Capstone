@@ -25,7 +25,7 @@ km=[Nb,(1:(Nb-1))]
 K=9000
 rho=1
 mu=0.01
-tmax=4
+tmax=0.00050
 dt=0.00001
 clockmax=ceil(tmax/dt)
 
@@ -77,18 +77,14 @@ vorticity=(u(ixp,:,2)-u(ixm,:,2)-u(:,iyp,1)+u(:,iym,1))/(2*h);
 dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
 values= (-10*dvorticity):dvorticity:(10*dvorticity);
 valminmax=[min(values),max(values)];
-xgrid=zeros(Nx,Ny);
-ygrid=zeros(Nx,Ny);
 
-for j=0:(Nx-1)
-  xgrid(j+1,:)=j*h;
-end
-for j=0:(Ny-1)
-  ygrid(:,j+1)=j*h;
-end
+xgrid=(h*(0:1:(Nx-1)))';
+xgrid= repmat(xgrid,1,Ny);
+ygrid=(h*(0:1:(Ny-1)));
+ygrid= repmat(ygrid,Nx,1);
 
 
-set(gcf,'double','on')
+% set(gcf,'double','on')
 % contour(xgrid,ygrid,vorticity,values)
 % hold on
 %for i = 1:num_flappers
