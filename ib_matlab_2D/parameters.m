@@ -32,7 +32,7 @@ if isempty(param_)
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=1e-3;
+    param_.tmax=1;
     param_.dt=0.00001;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     
@@ -46,7 +46,7 @@ if isempty(param_)
 
 param_.xgrid=(param_.h*(0:1:(param_.Nx-1)));
 param_.ygrid=(param_.h*(0:1:(param_.Ny-1)));
-[param_.ygrid,param_.xgrid] = meshgrid(param_.xgrid,param_.ygrid);
+[param_.ygrid,param_.xgrid] = ndgrid(param_.xgrid,param_.ygrid);
 
     param_.w1=zeros(4,4);
     param_.w2=zeros(4,4);
