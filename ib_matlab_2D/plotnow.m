@@ -5,13 +5,13 @@ for i = 1:sim_idx-1
   X = simData{i,2};
   T = simData{i,3};
   time = simData{i,4};
-  if i == 1000
+  
+
+  if i >= 1000
   dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
   values= (-10*dvorticity):dvorticity:(10*dvorticity);
   valminmax=[min(values),max(values)];
-  end
-  if i> 1000
-  contour(xgrid,ygrid,vorticity,values);
+  contour(param.xgrid,param.ygrid,vorticity,values);
   hold on
   end
   plot(X(:,1),X(:,2),'kx')
