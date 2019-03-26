@@ -8,8 +8,8 @@ xline = round(size(u,1)/4);
 
 %get flux data
 for i=1:sim_idx-1
-u = simData{i,6};
-flux(i) = sum(u(xline,:,1));
+u_sim = simData{i,6};
+flux(i) = sum(u_sim(xline,:,1));
 end
 
 %Average over time for 100 snaps, assuming multiple of 100
@@ -18,7 +18,7 @@ for i = 1:numel(flux)/100
 end
 
 %Plot 
-plot(Flux)
+plot(Flux,'o');
+saveas(gcf,'Flux.jpg');
 
-end
 %sum
