@@ -1,31 +1,55 @@
 %Plot Dumped Data
+p = param;
+xline   = p.Lx / 8;
+xpoint  = xline  / (p.Lx/p.Nx);
 
 for i = 1:sim_idx-1
   vorticity = simData{i,1};
   X = simData{i,2};
   T = simData{i,3};
   time = simData{i,4};
-  
+  u_sim = simData{i,6};
 
+  %Start plotting vorticity after a while
   if i >= 1000
   dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
   values= (-10*dvorticity):dvorticity:(10*dvorticity);
   valminmax=[min(values),max(values)];
-  contour(param.xgrid,param.ygrid,vorticity,values);
+  contour(p.xgrid,p.ygrid,vorticity,values);
   hold on
   end
+ 
+  %Plot Flappers and Target points
   plot(X(:,1),X(:,2),'kx')
   hold on
-  for j =1:param.num_flappers
-     plot(T((j-1)*param.Nb+1:j*param.Nb,1),T((j-1)*param.Nb+1:j*param.Nb,2),'r-')
+  for j =1:p.num_flappers
+     plot(T((j-1)*p.Nb+1:j*p.Nb,1),T((j-1)*p.Nb+1:j*p.Nb,2),'r-')
   end
+  %get flux data
+  flux = sum(u_sim(xpoint,:,1));
+
+  %Format Plot
   axis equal manual
-  xlim([0 3]);
-  ylim([0 1]); 
+  xlim([0 p.Lx]);
+  ylim([0 p.Ly]); 
   if i> 1000 
   caxis(valminmax)
   end
-  title(['Time: ' num2str(time,4) ', dt:' num2str(param.dt) ', h:' num2str(param.h), ', Nx-Ny:', num2str(param.Nx) '-' num2str(param.Ny) ', Nb-202' ', Flappers:' num2str(param.num_flappers)])  
+
+  
+  title(['Time: ' num2str(time,3)  ', Flux:' num2str(flux) ' at x=' num2str(xline) ])
+
+  Grid = [' h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny)];
+  text(0,0.99*p.Ly,Grid);
+  
+  Time = [' dt:' num2str(p.dt) ' ,K:' num2str(param.K)];
+  text(0,0.97*p.Ly,Time);
+  
+  Flappers = [' Flappers:' num2str(p.num_flappers) ', Gap:' num2str(p.gap) ', Nb:' num2str(p.Nb) ', Freq:' num2str(param.freq)];
+  text(0,0.95*p.Ly,Flappers);
+
+
+
   if  ~mod(i,100)
       fprintf('Grabbing Frame %d \n',i)
   end

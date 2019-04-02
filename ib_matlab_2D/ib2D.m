@@ -14,8 +14,12 @@ clc
 param = parameters();
 % initialize
 param.a = init_a(param);
-[X,T] = flappers(param,param.num_flappers);
+[X,T] = flappers(param);
 u = init_fluid(param);
+
+plotConfig(param,X,T,u);
+
+
 
 Trest = T(:,2);
 snaptime = 100; %take snapshot after every snaptime 
