@@ -22,7 +22,7 @@ plotConfig(param,X,T,u);
 
 
 Trest = T(:,2);
-snaptime = 100; %take snapshot after every snaptime 
+snaptime = 200; %take snapshot after every snaptime 
 sim_idx = 1;
 simData = cell(ceil(param.clockmax/snaptime),6);
 num_frames = 0;

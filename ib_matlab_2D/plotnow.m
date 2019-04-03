@@ -39,13 +39,10 @@ for i = 1:sim_idx-1
   
   
 
-  Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K))};
+  Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K)),strcat(' Flappers:',num2str(p.num_flappers),', Gap:',num2str(p.gap)),strcat(' Nb:',num2str(p.Nb)),strcat(' Freq:',num2str(p.freq))};
   text(0,0.5*p.Ly,Info);
   
   
-%  Flappers = [' Flappers:' num2str(p.num_flappers) ', Gap:' num2str(p.gap) ', Nb:' num2str(p.Nb) ', Freq:' num2str(param.freq)];
-%  text(0,0.95*p.Ly,Flappers);
-
  line([xline,xline],[0,p.Ly],'LineStyle','--')
  FluxText = ['Net Flux:' num2str(flux,4) ' at x=' num2str(xline)];
  text(xline, 0.05*p.Ly,FluxText);
