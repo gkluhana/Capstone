@@ -37,19 +37,19 @@ for i = 1:sim_idx-1
   end
 
   
-  title(['Time: ' num2str(time,3)  ', Flux:' num2str(flux) ' at x=' num2str(xline) ])
-
-  Grid = [' h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny)];
-  text(0,0.99*p.Ly,Grid);
   
-  Time = [' dt:' num2str(p.dt) ' ,K:' num2str(param.K)];
-  text(0,0.97*p.Ly,Time);
+
+  Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K))};
+  text(0,0.5*p.Ly,Info);
   
-  Flappers = [' Flappers:' num2str(p.num_flappers) ', Gap:' num2str(p.gap) ', Nb:' num2str(p.Nb) ', Freq:' num2str(param.freq)];
-  text(0,0.95*p.Ly,Flappers);
+  
+%  Flappers = [' Flappers:' num2str(p.num_flappers) ', Gap:' num2str(p.gap) ', Nb:' num2str(p.Nb) ', Freq:' num2str(param.freq)];
+%  text(0,0.95*p.Ly,Flappers);
 
-
-
+ line([xline,xline],[0,p.Ly],'LineStyle','--')
+ FluxText = ['Net Flux:' num2str(flux,4) ' at x=' num2str(xline)];
+ text(xline, 0.05*p.Ly,FluxText);
+ 
   if  ~mod(i,100)
       fprintf('Grabbing Frame %d \n',i)
   end

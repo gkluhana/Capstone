@@ -32,7 +32,7 @@ if isempty(param_)
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=0.00050;
+    param_.tmax=0.010;
     param_.dt=0.00001;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     
