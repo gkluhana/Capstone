@@ -1,5 +1,7 @@
-function F=Force(param,X,T)
+function F=Force(p,X,T)
 % global kp km dtheta K T;
 
 %F=K*(X(kp,:)+X(km,:)-2*X)/(dtheta*dtheta);
-F = -param.K*(X-T);
+follower = p.Nb+1:p.Nb+p.Nb;
+D = -(1/p.Nb)*sum(T(follower) - X(follower))
+F = -param.K*(X-(T+D));
