@@ -8,14 +8,15 @@ front = strcat('Fixed',num2str(p.tmax),'s',num2str(p.gap));
 
 % pick point to evaluate
 xline = round(size(u,1)/4);
-
+j=0;
 %geti flux/force data
 for dim = ['X','Y']
+	j = j+1;
 	for i=1:sim_idx-1
 	u_sim = simData{i,6};
 	flux(i) = sum(u_sim(xline,:,j));
 	forceFlappers = simData{i,5};
-	forceFollow(i) = sum(forceFlappers(p.Nb+1:p.Nb+p.Nb,1))*p.dtheta;
+	forceFollow(i) = sum(forceFlappers(p.Nb+1:p.Nb+p.Nb,j))*p.dtheta;
 	end
 
 	%Average over time for 100 snaps, assuming multiple of 100
