@@ -3,7 +3,7 @@
 %Compute Flux
 flapper  = 'Fixed';
 %flapper  = 'Variable';
-front = strcat('Fixed',num2str(p.tmax),num2str(p.gap));
+front = strcat('Fixed',num2str(p.tmax),'s',num2str(p.gap));
 
 
 % pick point to evaluate
@@ -35,12 +35,12 @@ for dim = ['X','Y']
 	saveas(gcf,filename);
 
 
-	size(forceFlappers(p.Nb+1:p.Nb+p.Nb,1))
-	snaps = sim_idx -1
-	interval = p.tmax / snaps
-	flap = 1 / p.freq
-	flapsnap = floor(flap / interval)
-	totalflaps =floor(snaps/flapsnap)
+	size(forceFlappers(p.Nb+1:p.Nb+p.Nb,1));
+	snaps = sim_idx -1;
+	interval = p.tmax / snaps;
+	flap = 1 / p.freq;
+	flapsnap = floor(flap / interval);
+	totalflaps =floor(snaps/flapsnap);
 
 	%Average over time for each flap, assuming multiple of 166
 	for i = 1:totalflaps
