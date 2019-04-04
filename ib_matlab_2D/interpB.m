@@ -1,9 +1,9 @@
-function U=interpB(param,u,X)
-Nx= param.Nx;
-Ny= param.Ny;
-h= param.h;
-Nb=param.Nb;
-num_flappers=param.num_flappers;
+function U=interpB(p,u,X)
+Nx= p.Nx;
+Ny= p.Ny;
+h= p.h;
+Nb=p.Nb;
+num_flappers=p.num_flappers;
 
 
 for k=1:Nb*num_flappers
@@ -31,7 +31,6 @@ for k=1:Nb*num_flappers
     w= w1.*w2;
   U(k,1)=sum(sum(w.*u(i1,i2,1)));
   U(k,2)=sum(sum(w.*u(i1,i2,2)));
-  
 end
 
 

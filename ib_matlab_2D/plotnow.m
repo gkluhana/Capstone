@@ -27,7 +27,7 @@ for i = 1:sim_idx-1
   end
   %get flux data
   flux = sum(u_sim(xpoint,:,1));
-
+  meanFlux = flux/p.Ly;
   %Format Plot
   axis equal manual
   xlim([0 p.Lx]);
@@ -38,8 +38,8 @@ for i = 1:sim_idx-1
 
   
   
-
-  Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K)),strcat(' Flappers:',num2str(p.num_flappers),', Gap:',num2str(p.gap)),strcat(' Nb:',num2str(p.Nb)),strcat(' Freq:',num2str(p.freq))};
+  gap = Tail2Head(p,X);
+  Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K)),strcat(' Flappers:',num2str(p.num_flappers)),strcat(' Gap:',num2str(gap)),strcat(' Nb:',num2str(p.Nb)),strcat(' Freq:',num2str(p.freq))};
   text(0,0.5*p.Ly,Info);
   
   

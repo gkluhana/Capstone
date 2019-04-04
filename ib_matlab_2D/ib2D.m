@@ -11,29 +11,29 @@ clc
 %wing
 
 
-param = parameters();
+p = parameters();
 % initialize
-param.a = init_a(param);
-[X,T] = flappers(param);
-u = init_fluid(param);
+p.a = init_a(p);
+[X,T] = flappers(p);
+u = init_fluid(p);
 
-plotConfig(param,X,T,u);
+plotConfig(p,X,T,u);
 
 
 
 Trest = T(:,2);
 snaptime = 200; %take snapshot after every snaptime 
 sim_idx = 1;
-simData = cell(ceil(param.clockmax/snaptime),6);
+simData = cell(ceil(p.clockmax/snaptime),6);
 num_frames = 0;
-for clock=1:param.clockmax
-    time = clock*param.dt;
-    XX=X+(param.dt/2)*interpB(param,u,X);
-    F = Force(param,XX,T); 
-    ff = spread(param,F,XX);
-    T(:,2) =Trest - (param.delta/2 * ( param.amprel*sin(2*pi*param.freq*time)));
-    [u,uu]=fluid(param,u,ff);
-    X=X+param.dt*interpB(param,uu,XX);
+for clock=1:p.clockmax
+    time = clock*p.dt;
+    XX=X+(p.dt/2)*interpB(p,u,X);
+    F = Force(p,XX,T); 
+    ff = spread(p,F,XX);
+    T(:,2) =Trest - (p.delta/2 * ( p.amprel*sin(2*pi*p.freq*time)));
+    [u,uu]=fluid(p,u,ff);
+    X=X+p.dt*interpB(p,uu,XX);
     %!!Change Place for Calculation of T
     
 %   FLUX
@@ -41,7 +41,7 @@ for clock=1:param.clockmax
 %     flux = sum(u(fluxeval,:,1))*h; %times mesh width, integral over L
   
  if ~mod(clock,snaptime)
-  vorticity=(u(param.ixp,:,2)-u(param.ixm,:,2)-u(:,param.iyp,1)+u(:,param.iym,1))/(2*param.h);
+  vorticity=(u(p.ixp,:,2)-u(p.ixm,:,2)-u(:,p.iyp,1)+u(:,p.iym,1))/(2*p.h);
   simData(sim_idx,:) = [{vorticity}, {X} , {T} ,{time},{F},{u} ];
        if ~mod(clock,snaptime*10)
           num_frames = num_frames + 10;
