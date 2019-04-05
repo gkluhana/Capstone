@@ -1,9 +1,10 @@
 %Combining Flux,Force compute and f=plot code
-
+figure;
+hold off;
 %Compute Flux
-flapper  = 'Fixed';
-%flapper  = 'Variable';
-front = strcat('Fixed',num2str(p.tmax),'s',num2str(p.gap));
+%flapper  = 'Fixed';
+flapper  = 'Variable';
+front = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap));
 
 
 % pick point to evaluate
@@ -28,7 +29,7 @@ for dim = ['X','Y']
 	plot(flux,'o');
 	xlabel('')
 	ylabel('Net Flux averaged over time')
-	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb-202' ', Flappers:' num2str(p.num_flappers)])
+	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb:' num2str(p.Nb) ', Flappers:' num2str(p.num_flappers)])
 
 
 	filename = strcat(front,'Flux',dim,'.jpg');

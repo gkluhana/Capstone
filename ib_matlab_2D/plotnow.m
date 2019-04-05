@@ -1,7 +1,10 @@
 %Plot Dumped Data
 xline   = p.Lx / 8;
 xpoint  = xline  / (p.Lx/p.Nx);
+flapper  = 'Variable';
+filename = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'.avi');
 
+figure;
 for i = 1:sim_idx-1
   vorticity = simData{i,1};
   X = simData{i,2};
@@ -56,7 +59,7 @@ for i = 1:sim_idx-1
 end
 
 %create the video writer with 1 fps
-  writerObj = VideoWriter('Figures/myVideo.avi');
+  writerObj = VideoWriter(filename);
   writerObj.FrameRate = 50;
   % set the seconds per image
 % open the video writer
