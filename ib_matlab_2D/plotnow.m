@@ -1,5 +1,4 @@
 %Plot Dumped Data
-p = param;
 xline   = p.Lx / 8;
 xpoint  = xline  / (p.Lx/p.Nx);
 

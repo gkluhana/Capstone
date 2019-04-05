@@ -1,4 +1,4 @@
-function F=Force(p,X,T)
+function [F,T]=Force(p,X,T)
 % global kp km dtheta K T;
 
 %Matrix for adding Deviation to second flapper
@@ -10,3 +10,4 @@ E(follower,1) = 1;
 
 D = -(1/p.Nb)*sum(T(follower,1) - X(follower,1));
 F = -p.K*(X-(T+D*E));
+T = T+D*E;

@@ -26,13 +26,13 @@ if isempty(param_)
     param_.dtheta=2*pi/param_.Nb;
     param_.kp=[(2:param_.Nb),1];
     param_.km=[param_.Nb,(1:(param_.Nb-1))];
-    param_.K=3000;
+    param_.K=9000;
     param_.rho=1;
     param_.mu=0.01;
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=0.010;
+    param_.tmax=10;
     param_.dt=0.00001;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     
