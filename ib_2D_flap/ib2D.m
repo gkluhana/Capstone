@@ -11,7 +11,7 @@ clc
 %wing
 
 
-p = parameters();
+p = parameters()
 % initialize
 p.a = init_a(p);
 [X,T] = flappers(p);

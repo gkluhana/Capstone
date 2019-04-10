@@ -7,14 +7,15 @@ flapper  = 'Variable';
 filename = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'.avi');
 figure;
 for i = 1:sim_idx-1
-  X = simData{i,1};
-  T = simData{i,2};
-  time = simData{i,3};
-  u_sim = simData{i,4};
+  vorticity = simData{i,1};
+  X = simData{i,2};
+  T = simData{i,3};
+  time = simData{i,4};
+  u_sim = simData{i,6};
 
   %Start plotting vorticity after a while
   if i >= 500
-  vorticity=(u_sim(p.ixp,:,2)-u_sim(p.ixm,:,2)-u_sim(:,p.iyp,1)+u_sim(:,p.iym,1))/(2*p.h);
+ % vorticity=(u_sim(p.ixp,:,2)-u_sim(p.ixm,:,2)-u_sim(:,p.iyp,1)+u_sim(:,p.iym,1))/(2*p.h);
   if i == 500
   dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
   values= -1*dvorticity:10:dvorticity;

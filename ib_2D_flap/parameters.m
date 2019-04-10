@@ -32,15 +32,15 @@ if isempty(param_)
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=5;
+    param_.tmax=30;
     param_.dt=0.00001;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     
     %Flappers
-    param_.num_flappers = 2;
+    param_.num_flappers = 1;
     param_.width = param_.L/2;
-    param_.gappc = 0.3;
-    param_.gap = param_.Lx/4 + param_.gappc*param_.L;
+    param_.gappc = 0.1;
+    param_.gap = 3/4 + param_.gappc*param_.L;
     param_.leader_shift= param_.Lx/4;
     param_.xpos = 0:1:param_.num_flappers-1;
     param_.xcenter = param_.Lx/2 + param_.leader_shift - param_.gap*param_.xpos;
