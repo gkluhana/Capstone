@@ -1,4 +1,3 @@
-% convert the image to a frame
 % ib2D.m
 % This script is the main program.
 
@@ -6,25 +5,18 @@ close all
 clear
 clc
 
-%T is location of target points
-%delta, amprel, and freq are variables that prescrible the motion of the
-%wing
-
-
+%Initialize parameters
 p = parameters()
-% initialize
-p.a = init_a(p);
-[X,T] = flappers(p);
-u = init_fluid(p);
+p.a = init_a(p);            %matrix
+[X,T] = flappers(p);        %[Boundary Points, Target Points]
+u = init_fluid(p);          
 
+%Check Initial Configuration of system
 %plotConfig(p,X,T,u);
 
-
-
 Trest = T(:,2);
-snaptime = 200; %take snapshot after every snaptime 
 sim_idx = 1;
-simData = cell(ceil(p.clockmax/snaptime),5);
+simData = cell(ceil(p.clockmax/p.snaptime),5);
 num_frames = 0;
 for clock=1:p.clockmax
     time = clock*p.dt;
@@ -40,9 +32,9 @@ for clock=1:p.clockmax
 %     fluxeval = Nx/8;
 %     flux = sum(u(fluxeval,:,1))*h; %times mesh width, integral over L
   
- if ~mod(clock,snaptime)
+ if ~mod(clock,p.snaptime)
     simData(sim_idx,:) = [ {X} , {T} ,{time},{u} ,{F}];
-       if ~mod(clock,snaptime*10)
+       if ~mod(clock,p.snaptime*10)
           num_frames = num_frames + 10;
           fprintf('Saved %d frames in SimData at Time %d \n ',num_frames,time)
        end

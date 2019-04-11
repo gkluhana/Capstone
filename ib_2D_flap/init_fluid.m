@@ -9,7 +9,7 @@ u=zeros(param.Nx,param.Ny,2);
 %end
 
 
-%%Don't calculate right now if no vorticity at the start
+%%Calculate right now if fluid not at rest at the start
 % 
 % vorticity=(u(ixp,:,2)-u(ixm,:,2)-u(:,iyp,1)+u(:,iym,1))/(2*h);
 % dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
