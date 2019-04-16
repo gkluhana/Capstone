@@ -5,6 +5,7 @@ xline   = p.Lx / 8;
 xpoint  = xline  / (p.Lx/p.Nx);
 flapper  = 'Variable';
 filename = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'.avi');
+startVort = 250;
 figure;
 for i = 1:sim_idx-1
   X = simData{i,1};
@@ -13,9 +14,9 @@ for i = 1:sim_idx-1
   u_sim = simData{i,4};
 
   %Start plotting vorticity after a while
-  if i >= 500
+  if i >= startVort
   vorticity=(u_sim(p.ixp,:,2)-u_sim(p.ixm,:,2)-u_sim(:,p.iyp,1)+u_sim(:,p.iym,1))/(2*p.h);
-  if i == 500
+  if i == startVort
   dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
   values= -1*dvorticity:10:dvorticity;
   valminmax=[min(values),max(values)];
@@ -44,7 +45,8 @@ for i = 1:sim_idx-1
   axis equal manual
   xlim([0 p.Lx]);
   ylim([0 p.Ly]); 
-  if i> 1000 
+  
+  if i >= startVort 
   caxis(valminmax)
   end
 

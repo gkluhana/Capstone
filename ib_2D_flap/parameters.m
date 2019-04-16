@@ -32,10 +32,10 @@ if isempty(param_)
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=30;
+    param_.tmax=0.0005;
     param_.dt=0.00001;
     param_.clockmax=ceil(param_.tmax/param_.dt);
-    
+    param_.snaptime= 200;
     %Flappers
     param_.num_flappers = 1;
     param_.width = param_.L/2;
