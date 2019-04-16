@@ -7,24 +7,27 @@ flapper  = 'Variable';
 filename = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'.avi');
 startVort = 250;
 figure;
+plotVorticity = 0;  %plot Vorticity switch
+XTperiodic  %make X and T periodic for plotting
 for i = 1:sim_idx-1
   X = simData{i,1};
   T = simData{i,2};
   time = simData{i,3};
   u_sim = simData{i,4};
-
-  %Start plotting vorticity after a while
-  if i >= startVort
-  vorticity=(u_sim(p.ixp,:,2)-u_sim(p.ixm,:,2)-u_sim(:,p.iyp,1)+u_sim(:,p.iym,1))/(2*p.h);
-  if i == startVort
-  dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
-  values= -1*dvorticity:10:dvorticity;
-  valminmax=[min(values),max(values)];
+  
+  if plotVorticity 
+	  %Start plotting vorticity after a while
+ 	 if i >= startVort
+ 		 vorticity=(u_sim(p.ixp,:,2)-u_sim(p.ixm,:,2)-u_sim(:,p.iyp,1)+u_sim(:,p.iym,1))/(2*p.h);
+ 	 if i == startVort
+ 		 dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
+ 		 values= -1*dvorticity:10:dvorticity;
+ 		 valminmax=[min(values),max(values)];
+ 	 end
+ 	 contour(p.xgrid,p.ygrid,vorticity,values);
+ 	 hold on
+ 	 end
   end
-  contour(p.xgrid,p.ygrid,vorticity,values);
-  hold on
-  end
- 
   %Plot Flappers and Target points
   plot(X(:,1),X(:,2),'kx')
   hold on
@@ -33,11 +36,7 @@ for i = 1:sim_idx-1
      plot(T((j-1)*p.Nb+1:j*p.Nb,1),T((j-1)*p.Nb+1:j*p.Nb,2),'r-')
   end
   
-  %Plot a periodic copy of second flapper and T ahead by Lx
-  second = p.Nb+1:p.Nb*2;
-  plot(X(second,1)+p.Lx,X(second,2),'kx');
-  plot(T(second,1)+p.Lx,T(second,2),'r-');
-  
+ 
   %get flux data
   flux = sum(u_sim(xpoint,:,1));
   meanFlux = flux/p.Ly;
@@ -46,10 +45,11 @@ for i = 1:sim_idx-1
   xlim([0 p.Lx]);
   ylim([0 p.Ly]); 
   
-  if i >= startVort 
-  caxis(valminmax)
+  if plotVorticity
+ 	 if i >= startVort 
+ 	 caxis(valminmax)
+ 	 end
   end
-
   
   
   gap = Tail2Head(p,X);
