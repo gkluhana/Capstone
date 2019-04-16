@@ -4,7 +4,7 @@ for i = 1:frames
     X = simData{i,1};
     gap(i) = Tail2Head(p,X);
 end
-time = simData{:,3};
+time = frametime:frametime:p.tmax;
 plot(time,gap);
 xstr = strcat('Time (',num2str(p.freq),' flaps per second)');
 xlabel(xstr);

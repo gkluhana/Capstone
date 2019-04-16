@@ -45,7 +45,7 @@ for i = 1:sim_idx-1
   axis equal manual
   xlim([0 p.Lx]);
   ylim([0 p.Ly]); 
-  if i> 1000 
+  if i> 500 
   caxis(valminmax)
   end
 
