@@ -3,8 +3,8 @@ figure;
 hold off;
 %Compute Flux
 %flapper  = 'Fixed';
-flapper  = 'Variable';
-front = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap));
+flapper  = 'BothFree';
+front = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'dt',num2str(p.dt));
 
 
 % pick point to evaluate

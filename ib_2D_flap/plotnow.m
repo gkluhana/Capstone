@@ -3,11 +3,11 @@ p = p; %Check for parameters existing.otherwise create again
 % p = parameters()
 xline   = p.Lx / 8;
 xpoint  = xline  / (p.Lx/p.Nx);
-flapper  = 'Variable';
-filename = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'.avi');
+flapper  = 'BothFree';
+filename = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'dt',num2str(p.dt),'.avi');
 startVort = 250;
 figure;
-plotVorticity = 0;  %plot Vorticity switch
+plotVorticity = 1;  %plot Vorticity switch
 XTperiodic  %make X and T periodic for plotting
 for i = 1:sim_idx-1
   X = simData{i,1};
@@ -33,7 +33,7 @@ for i = 1:sim_idx-1
   hold on
   
   for j =1:p.num_flappers
-     plot(T((j-1)*p.Nb+1:j*p.Nb,1),T((j-1)*p.Nb+1:j*p.Nb,2),'r-')
+     plot(T((j-1)*p.Nb+1:j*p.Nb,1),T((j-1)*p.Nb+1:j*p.Nb,2),'rx')
   end
   
  

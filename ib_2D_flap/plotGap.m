@@ -12,5 +12,5 @@ plot(time,gap);
 xstr = strcat('Time (',num2str(p.freq),' flaps per second)');
 xlabel(xstr);
 ylabel('Gap between flappers');
-filename = strcat('Variable',num2str(p.tmax),'s',num2str(p.gap),'Gap.jpg');
+filename = strcat('BothFree',num2str(p.tmax),'s',num2str(p.gap),'dt',num2str(p.dt),'Gap.jpg');
 saveas(gcf,filename);
