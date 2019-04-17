@@ -1,8 +1,10 @@
-frames = size(Xdata,1);
-frametime = p.dt*p.snaptime;
+frames = size(Xdata,1); frametime = p.dt*p.snaptime;
 for i = 1:frames
     X = simData{i,1};
     gap(i) = Tail2Head(p,X);
+    if gap(i) < 0
+        gap(i) = p.Lx - abs(gap(i));
+    end
 end
 time = frametime:frametime:p.tmax;
 plot(time,gap);
