@@ -1,4 +1,4 @@
-frames = size(Xdata,1);
+frames = size(simData,1);
 frametime = p.dt*p.snaptime;
 for i = 1:frames
     X = simData{i,1};
