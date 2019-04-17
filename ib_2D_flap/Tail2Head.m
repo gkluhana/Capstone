@@ -5,3 +5,7 @@ Head = max(X(p.Nb+1:p.Nb+p.Nb,1));
 
 gap = Tail - Head;
 
+if gap < 0
+ gap = p.Lx - abs(gap);
+end
+
