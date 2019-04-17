@@ -7,7 +7,9 @@ flapper  = 'BothFree';
 filename = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'dt',num2str(p.dt),'.avi');
 startVort = 250;
 figure;
-plotVorticity = 1;  %plot Vorticity switch
+if ~exist plotVorticity
+	plotVorticity = 0;  %plot Vorticity switch, default for 0 if not specified by user
+end
 XTperiodic  %make X and T periodic for plotting
 for i = 1:sim_idx-1
   X = simData{i,1};
