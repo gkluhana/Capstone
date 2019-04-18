@@ -23,7 +23,7 @@ for clock=1:p.clockmax
     XX=X+(p.dt/2)*interpB(p,u,X);
     [F,T] = Force(p,XX,T); 
     ff = spread(p,F,XX);
-    T(:,2) =Trest - (p.delta/2 * ( p.amprel*sin(2*pi*p.freq*time)));
+    T(:,2) =Trest -  (0.5*p.amprel*sin(2*pi*p.freq*time));
     [u,uu]=fluid(p,u,ff);
     X=X+p.dt*interpB(p,uu,XX);
     %!!Change Place for Calculation of T
