@@ -2,15 +2,15 @@
 p = p; %Check for parameters existing.otherwise create again
 % p = parameters()
 xline   = p.Lx / 8;
-xpoint  = xline  / (p.Lx/p.Nx);
-flapper  = 'BothFree';
-filename = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'dt',num2str(p.dt),'.avi');
+xpoint  = ceil(xline  / (p.Lx/p.Nx));
+front = fileName(p);
+filename = strcat(front,'.avi');
 startVort = 250;
 figure;
 if ~exist('plotVorticity')
 	plotVorticity = 0;  %plot Vorticity switch, default for 0 if not specified by user
 end
-XTperiodic  %make X and T periodic for plotting
+%XTperiodic  %make X and T periodic for plotting
 for i = 1:sim_idx-1
   X = simData{i,1};
   T = simData{i,2};
@@ -31,11 +31,11 @@ for i = 1:sim_idx-1
  	 end
   end
   %Plot Flappers and Target points
-  plot(X(:,1),X(:,2),'kx')
+  plot(X(:,1),X(:,2),'ko')
   hold on
   
   for j =1:p.num_flappers
-     plot(T((j-1)*p.Nb+1:j*p.Nb,1),T((j-1)*p.Nb+1:j*p.Nb,2),'rx')
+     plot(T((j-1)*p.Nb+1:j*p.Nb,1),T((j-1)*p.Nb+1:j*p.Nb,2),'r-')
   end
   
  
@@ -45,7 +45,7 @@ for i = 1:sim_idx-1
   %Format Plot
   axis equal manual
   xlim([0 p.Lx]);
-  ylim([0 p.Ly]); 
+  ylim([5 20]); 
   
   if plotVorticity
  	 if i >= startVort 

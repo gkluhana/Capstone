@@ -29,6 +29,7 @@ for k=1:Nb*num_flappers
     
 %   w=phi1(r(1)).*phi2(r(2));
     w= w1.*w2;
+
   U(k,1)=sum(sum(w.*u(i1,i2,1)));
   U(k,2)=sum(sum(w.*u(i1,i2,2)));
 end

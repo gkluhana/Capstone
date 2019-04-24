@@ -4,8 +4,7 @@ hold off;
 %Compute Flux
 %flapper  = 'Fixed';
 flapper  = 'BothFree';
-front = strcat(flapper,num2str(p.tmax),'s',num2str(p.gap),'dt',num2str(p.dt));
-
+front = fileName(p);
 
 % pick point to evaluate
 xline = round(size(u,1)/4);
@@ -67,3 +66,4 @@ for dim = ['X','Y']
 
 
 end
+
