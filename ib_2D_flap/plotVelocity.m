@@ -61,6 +61,11 @@ if exist('multiple')
     legend('leader','follower')
 else
 end
+front = fileName(p);
+filename = strcat(front,'Velocity.jpg');
+saveas(gcf,filename);
+hold off;
+
 % hold on 
 % plot(velocityAvg)
 % ylim([-10, 10])

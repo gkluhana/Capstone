@@ -3,6 +3,7 @@
 fprintf('Making Pictures...\n')
 makePictures;
 plotGap;
+plotVelocity;
 fprintf('Saving Data...\n')
 saveData
 fprintf('Making X and T periodic...\n')
