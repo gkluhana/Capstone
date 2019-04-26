@@ -6,7 +6,7 @@ if isempty(param_)
     param_.Lx = 116*param_.L;
     param_.Ly = 27*param_.L;
     %Grid
-    param_.N=8;
+    param_.N=10;
     param_.h=param_.L/param_.N;
     param_.Nx = param_.Lx/param_.h;
     param_.Ny = param_.Ly/param_.h;
@@ -32,25 +32,42 @@ if isempty(param_)
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=15;
-    param_.dt=0.0001;
+    param_.tmax=10;
+    param_.dt=0.00005;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     param_.snaptime= param_.tmax/(1000*param_.dt); %take 1000 snaps
+    
     %Flappers
     param_.num_flappers =2;
     param_.width = 4*param_.L;
+    
+    %Prescribed motion variables for boundary
+    param_.AoverC = 0.8;  %peak-to-peak amplitude ratio to chord
+    param_.amprel = param_.AoverC*param_.width;
+    param_.freq   = 4;
+    param_.inPhase  = 0;
+    param_.phi = 0;
+    param_.ampfactor= 0.5;
+    if param_.num_flappers == 1
+        param_.inPhase = 1;
+    end
+    
+    
+    %Initial position of flappers
     param_.gappc = 6/2;
     param_.gap = param_.gappc*param_.width;
     param_.Tail2Head = param_.gap-param_.width;
     param_.leader_shift= -1*param_.Lx/4;
     param_.xpos = 0:1:param_.num_flappers-1;
     param_.xcenter = param_.Lx/2 + param_.leader_shift - param_.gap*param_.xpos;
-    param_.ycenter = param_.Ly/2;
-     
-    %Prescribed motion variables for boundary
-    param_.AoverC = 0.8;  %peak-to-peak amplitude ratio to chord
-    param_.amprel = param_.AoverC*param_.width;
-    param_.freq   = 4;
+    param_.lateralShiftFac = 0;
+    param_.ycenter = [param_.Ly/2  param_.Ly/2+param_.lateralShiftFac*param_.amprel];
+    
+    param_.Free = 1;
+    param_.leaderFree = 1;
+    param_.followerFree= 1;
+    param_.followerConstant= 0;
+    
    
 
 param_.xgrid=(param_.h*(0:1:(param_.Nx-1)));

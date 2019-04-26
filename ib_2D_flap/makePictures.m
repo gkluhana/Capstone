@@ -28,7 +28,7 @@ for dim = ['X','Y']
 	plot(flux,'o');
 	xlabel('')
 	ylabel('Net Flux averaged over time')
-	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb:' num2str(p.Nb) ', Flappers:' num2str(p.num_flappers)])
+% 	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb:' num2str(p.Nb) ', Flappers:' num2str(p.num_flappers)])
 
 
 	filename = strcat(front,'Flux',dim,'.jpg');
@@ -52,7 +52,7 @@ for dim = ['X','Y']
 	plot(forceFollow,'o');
 	xlabel('snapshot number');
 	ylabel('Net Force on Follower')
-	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb-202'])
+% 	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb-202'])
 
 	filename = strcat(front,'force',dim,'.jpg');
 	saveas(gcf,filename);
@@ -63,7 +63,6 @@ for dim = ['X','Y']
 	ylabel ('Time averaged Force on Folllower')
 	filename=strcat(front,'Force',dim,'.jpg');
 	saveas(gcf,filename);
-
 
 end
 

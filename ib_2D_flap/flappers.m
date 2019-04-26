@@ -8,6 +8,6 @@ function [X,T] = flappers(param)
 
 %Jukowski Airfoils with Target Points with center (xcetner, ycenter) and chord length param.width
 for i =1:param.num_flappers
-    X((i-1)*param.Nb+1:i*param.Nb,:) = airfoil(param.L,param.xcenter(i),param.ycenter,param.width,param.Nb,param.dtheta);
-    T((i-1)*param.Nb+1:i*param.Nb,:) = airfoil(param.L,param.xcenter(i),param.ycenter,param.width,param.Nb,param.dtheta);
+    X((i-1)*param.Nb+1:i*param.Nb,:) = airfoil(param.L,param.xcenter(i),param.ycenter(i),param.width,param.Nb,param.dtheta);
+    T((i-1)*param.Nb+1:i*param.Nb,:) = airfoil(param.L,param.xcenter(i),param.ycenter(i),param.width,param.Nb,param.dtheta);
 end

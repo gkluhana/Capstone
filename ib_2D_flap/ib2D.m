@@ -12,26 +12,32 @@ p.a = init_a(p);            %matrix
 u = init_fluid(p);          
 
 %Check Initial Configuration of system
-%plotConfig(p,X,T,u);
+plotConfig(p,X,T,u);
 
 Trest = T(:,2);
 sim_idx = 1;
 simData = cell(ceil(p.clockmax/p.snaptime),5);
 num_frames = 0;
+leader = 1:p.Nb;
+if size(X,1) > p.Nb
+    follower = leader + p.Nb;
+end
+    
 for clock=1:p.clockmax
     time = clock*p.dt;
     XX=X+(p.dt/2)*interpB(p,u,X);
     [F,T] = Force(p,XX,T); 
     ff = spread(p,F,XX);
-    T(:,2) =Trest -  (0.5*p.amprel*sin(2*pi*p.freq*time));
+    %Update Target Points
+    if p.inPhase
+        T(:,2) =Trest -  (0.5*p.amprel*sin(2*pi*p.freq*time));
+    else
+        T(leader,2) = Trest(leader) -  (0.5*p.amprel*sin(2*pi*p.freq*time));
+        T(follower,2) = Trest(follower) -  (p.ampfactor*0.5*p.amprel*sin(2*pi*p.freq*time - p.phi));
+    end
     [u,uu]=fluid(p,u,ff);
     X=X+p.dt*interpB(p,uu,XX);
-    %!!Change Place for Calculation of T
-    
-%   FLUX
-%     fluxeval = Nx/8;
-%     flux = sum(u(fluxeval,:,1))*h; %times mesh width, integral over L
-  
+ 
  if ~mod(clock,p.snaptime)
     simData(sim_idx,:) = [ {X} , {T} ,{time},{u} ,{F}];
        if ~mod(clock,p.snaptime*10)

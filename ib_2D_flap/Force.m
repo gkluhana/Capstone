@@ -2,10 +2,10 @@ function [F,T]=Force(p,X,T)
 % global kp km dtheta K T;
 
 %Matrix for adding Deviation to flappers
-Free = 1;
-leaderFree = 1;
-followerFree=0;
-
+Free = p.Free;
+leaderFree = p.leaderFree;
+followerFree=p.followerFree;
+followerConstant=p.followerConstant;
 if Free
 	leader   = 1:p.Nb;
 	follower = leader + p.Nb;
@@ -13,7 +13,7 @@ if Free
 	if leaderFree
 	E(leader,  1,1)  = 1;
 	end
-        if followerFree	
+        if followerFree|followerConstant	
 	E(follower,1,2)  = 1;
 	end
 end
@@ -28,6 +28,9 @@ end
 if followerFree 
 	D(2)  = -(1/p.Nb)*sum(T(follower,1) - X(follower,1));
 	T = T+D(2)*E(:,:,2);
+end
+if followerConstant
+ 	T = T+D(1)*E(:,:,2);
 end
 
 

@@ -66,7 +66,7 @@ for i = 1:sim_idx-1
   if  ~mod(i,100)
       fprintf('Grabbing Frame %d \n',i)
   end
-      set(gcf,'Position',[0 0 1500 500]);
+%      set(gcf,'Position',[0 0 1500 500]);
       Frames(i) = getframe(gcf) ;
 %   drawnow
   hold off

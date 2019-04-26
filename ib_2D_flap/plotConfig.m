@@ -22,6 +22,10 @@ Grid = [' h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny)];
 text(0,0.99*p.Ly,Grid);
 Time = [' dt:' num2str(p.dt)];
 text(0,0.97*p.Ly,Time);
-Flappers = [' Flappers:' num2str(p.num_flappers) ', Gap:' num2str(p.gap) ', Nb:' num2str(p.Nb)];
+Flappers = [' Flappers:' num2str(p.num_flappers) ', Gap:' num2str(p.Tail2Head) ', Nb:' num2str(p.Nb)];
 text(0,0.95*p.Ly,Flappers);
+
+front = fileName(p);
+filename = strcat(front,'InitConfig.jpg');
+saveas(gcf,filename);
 
