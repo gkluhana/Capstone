@@ -25,8 +25,7 @@ for dim = ['X','Y']
 	end
 
 	%Plot Flux
-	plot(simData{:,3},flux,'o');
-	xlabel('Time');
+	plot(flux,'o');
 	ylabel('Net Flux averaged over time')
 % 	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb:' num2str(p.Nb) ', Flappers:' num2str(p.num_flappers)])
 
@@ -49,8 +48,7 @@ for dim = ['X','Y']
 	end
 
 	%Plot raw force
-	plot(simData{:,3},forceFollow,'o');
-	xlabel('Time');
+	plot(forceFollow,'o');
 	ylabel('Net Force on Follower')
 % 	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb-202'])
 

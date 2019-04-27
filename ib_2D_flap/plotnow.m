@@ -24,14 +24,14 @@ end
 
 if plotTrace
    maxTrace = 100;
-   Tails = nan(maxTrace,2)
+   Tails = nan(maxTrace,2);
    [Tailx,tailIndex] = min(X(leader,1));
-   Tails(1,:) = [X(tailIndex,1),X(tailIndex,2)]
+   Tails(1,:) = [X(tailIndex,1),X(tailIndex,2)];
        if p.num_flappers > 1
-       Heads = nan(maxTrace,2)
+       Heads = nan(maxTrace,2);
        [Headx,headIndex] = max(X(follower,1));
-       headIndex = headIndex+p.Nb
-       Heads(1,:) = [X(headIndex,1),X(headIndex,2)]
+       headIndex = headIndex+p.Nb;
+       Heads(1,:) = [X(headIndex,1),X(headIndex,2)];
     end
 end
 
@@ -86,16 +86,16 @@ for i = 1:sim_idx-1
   
   if plotTrace
      if i > maxTrace
-           Tails = [Tails(2:end,:); X(tailIndex,1),X(tailIndex,2)]
+           Tails = [Tails(2:end,:); X(tailIndex,1),X(tailIndex,2)];
      else
-            Tails(i,:) = [X(tailIndex,1),X(tailIndex,2)]
+            Tails(i,:) = [X(tailIndex,1),X(tailIndex,2)];
      end
      plot(mod(Tails(:,1),p.Lx),Tails(:,2),'ko','MarkerSize',0.8)
       if p.num_flappers > 1
           if i > maxTrace
-             Heads = [Heads(2:end,:); X(headIndex,1),X(headIndex,2)]
+             Heads = [Heads(2:end,:); X(headIndex,1),X(headIndex,2)];
           else
-              Heads(i,:) = [X(headIndex,1),X(headIndex,2)]
+              Heads(i,:) = [X(headIndex,1),X(headIndex,2)];
           end
       plot(mod(Heads(:,1),p.Lx),Heads(:,2),'ro','MarkerSize',0.8)
      end
