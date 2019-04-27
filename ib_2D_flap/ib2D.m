@@ -12,15 +12,15 @@ p.a = init_a(p);            %matrix
 u = init_fluid(p);          
 
 %Check Initial Configuration of system
-plotConfig(p,X,T,u);
+% plotConfig(p,X,T,u);
 
 Trest = T(:,2);
 sim_idx = 1;
 simData = cell(ceil(p.clockmax/p.snaptime),5);
 num_frames = 0;
 leader = 1:p.Nb;
-if size(X,1) > p.Nb
-    follower = leader + p.Nb;
+if p.num_flappers >1
+    follower = p.Nb+1 : size(X,1);
 end
     
 for clock=1:p.clockmax
@@ -42,7 +42,7 @@ for clock=1:p.clockmax
     simData(sim_idx,:) = [ {X} , {T} ,{time},{u} ,{F}];
        if ~mod(clock,p.snaptime*10)
           num_frames = num_frames + 10;
-          fprintf('Saved %d frames in SimData at Time %d \n ',num_frames,time)
+           fprintf('Saved %d frames in SimData at Time %d \n ',num_frames,time)
        end
   sim_idx= sim_idx+1;
   end

@@ -10,6 +10,31 @@ figure;
 if ~exist('plotVorticity')
 	plotVorticity = 0;  %plot Vorticity switch, default for 0 if not specified by user
 end
+
+X = simData{1,1};
+leader = 1:p.Nb;
+if p.num_flappers > 1
+    follower = p.Nb+1 :size(X,1);
+end
+
+%Trace
+if ~exist('plotTrace')
+    plotTrace = 1;  
+end
+
+if plotTrace
+   maxTrace = 100;
+   Tails = nan(maxTrace,2)
+   [Tailx,tailIndex] = min(X(leader,1));
+   Tails(1,:) = [X(tailIndex,1),X(tailIndex,2)]
+       if p.num_flappers > 1
+       Heads = nan(maxTrace,2)
+       [Headx,headIndex] = max(X(follower,1));
+       headIndex = headIndex+p.Nb
+       Heads(1,:) = [X(headIndex,1),X(headIndex,2)]
+    end
+end
+
 %XTperiodic  %make X and T periodic for plotting
 for i = 1:sim_idx-1
   X = simData{i,1};
@@ -31,14 +56,20 @@ for i = 1:sim_idx-1
  	 end
   end
   %Plot Flappers and Target points
-  plot(X(:,1),X(:,2),'ko')
+  plot(mod(X(leader,1),p.Lx),X(leader,2),'ko')
   hold on
   
-  for j =1:p.num_flappers
-     plot(T((j-1)*p.Nb+1:j*p.Nb,1),T((j-1)*p.Nb+1:j*p.Nb,2),'r-')
+  if p.num_flappers > 1
+        plot(mod(X(follower,1),p.Lx),X(follower,2),'ro')
   end
   
- 
+  
+  for j =1:p.num_flappers
+     plot(mod(T((j-1)*p.Nb+1:j*p.Nb,1),p.Lx),T((j-1)*p.Nb+1:j*p.Nb,2),'bo','MarkerSize',0.8)
+  end
+  
+
+  
   %get flux data
   flux = sum(u_sim(xpoint,:,1));
   meanFlux = flux/p.Ly;
@@ -53,6 +84,22 @@ for i = 1:sim_idx-1
  	 end
   end
   
+  if plotTrace
+     if i > maxTrace
+           Tails = [Tails(2:end,:); X(tailIndex,1),X(tailIndex,2)]
+     else
+            Tails(i,:) = [X(tailIndex,1),X(tailIndex,2)]
+     end
+     plot(mod(Tails(:,1),p.Lx),Tails(:,2),'ko','MarkerSize',0.8)
+      if p.num_flappers > 1
+          if i > maxTrace
+             Heads = [Heads(2:end,:); X(headIndex,1),X(headIndex,2)]
+          else
+              Heads(i,:) = [X(headIndex,1),X(headIndex,2)]
+          end
+      plot(mod(Heads(:,1),p.Lx),Heads(:,2),'ro','MarkerSize',0.8)
+     end
+  end
   
   gap = Tail2Head(p,X);
   Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K)),strcat(' Flappers:',num2str(p.num_flappers)),strcat(' Gap:',num2str(gap)),strcat(' Nb:',num2str(p.Nb)),strcat(' Freq:',num2str(p.freq))};

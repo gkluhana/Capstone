@@ -32,8 +32,8 @@ if isempty(param_)
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=10;
-    param_.dt=0.00005;
+    param_.tmax=0.0005;
+    param_.dt=0.00001;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     param_.snaptime= param_.tmax/(1000*param_.dt); %take 1000 snaps
     
