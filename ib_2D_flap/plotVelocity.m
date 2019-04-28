@@ -42,7 +42,7 @@ for i =2:frames
 end
 plot(time,velocity)
 hold on
- xlim([0, 10])
+ xlim([0, 3])
 xstr = strcat('Time (s) (',num2str(p.freq),' flaps per second)');
 xlabel(xstr);
 ylabel('Velocity of Flapper, \it U ','Interpreter','tex')

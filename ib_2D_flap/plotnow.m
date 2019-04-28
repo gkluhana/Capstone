@@ -8,7 +8,7 @@ filename = strcat(front,'.avi');
 startVort = 250;
 figure;
 if ~exist('plotVorticity')
-	plotVorticity = 0;  %plot Vorticity switch, default for 0 if not specified by user
+	plotVorticity = 1;  %plot Vorticity switch, default for 0 if not specified by user
 end
 
 X = simData{1,1};
@@ -56,17 +56,17 @@ for i = 1:sim_idx-1
  	 end
   end
   %Plot Flappers and Target points
-  plot(mod(X(leader,1),p.Lx),X(leader,2),'ko')
+  plot(mod(X(leader,1),p.Lx),X(leader,2),'ko','MarkerSize',0.4)
   hold on
   
   if p.num_flappers > 1
-        plot(mod(X(follower,1),p.Lx),X(follower,2),'ro')
+        plot(mod(X(follower,1),p.Lx),X(follower,2),'ro','MarkerSize',0.4)
   end
   
   
-  for j =1:p.num_flappers
-     plot(mod(T((j-1)*p.Nb+1:j*p.Nb,1),p.Lx),T((j-1)*p.Nb+1:j*p.Nb,2),'bo','MarkerSize',0.8)
-  end
+%  for j =1:p.num_flappers
+%     plot(mod(T((j-1)*p.Nb+1:j*p.Nb,1),p.Lx),T((j-1)*p.Nb+1:j*p.Nb,2),'bo','MarkerSize',0.8)
+%  end
   
 
   
@@ -76,7 +76,7 @@ for i = 1:sim_idx-1
   %Format Plot
   axis equal manual
   xlim([0 p.Lx]);
-  ylim([5 20]); 
+  ylim([0 p.Ly]); 
   
   if plotVorticity
  	 if i >= startVort 
@@ -103,7 +103,7 @@ for i = 1:sim_idx-1
   
   gap = Tail2Head(p,X);
   Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K)),strcat(' Flappers:',num2str(p.num_flappers)),strcat(' Gap:',num2str(gap)),strcat(' Nb:',num2str(p.Nb)),strcat(' Freq:',num2str(p.freq))};
-  text(0,0.5*p.Ly,Info);
+text(0,0.5*p.Ly,Info);
   
   
  line([xline,xline],[0,p.Ly],'LineStyle','--')
@@ -113,7 +113,7 @@ for i = 1:sim_idx-1
   if  ~mod(i,100)
       fprintf('Grabbing Frame %d \n',i)
   end
-%      set(gcf,'Position',[0 0 1500 500]);
+      set(gcf,'Position',[0 0 1160 270]);
       Frames(i) = getframe(gcf) ;
 %   drawnow
   hold off

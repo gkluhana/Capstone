@@ -3,7 +3,7 @@ figure;
 hold off;
 %Compute Flux
 %flapper  = 'Fixed';
-flapper  = 'BothFree';
+
 front = fileName(p);
 
 % pick point to evaluate
@@ -25,8 +25,10 @@ for dim = ['X','Y']
 	end
 
 	%Plot Flux
-	plot(flux,'o');
-	ylabel('Net Flux averaged over time')
+	plot(time,flux);
+	ylabel('Net Flux over time');
+        xlabel('Time(s)')
+	ylim([-1 1]);
 % 	  title(['Total Time: ' num2str(p.tmax,4) ', dt:' num2str(p.dt) ', h:' num2str(p.h), ', Nx-Ny:', num2str(p.Nx) '-' num2str(p.Ny) ', Nb:' num2str(p.Nb) ', Flappers:' num2str(p.num_flappers)])
 
 
