@@ -8,7 +8,7 @@ filename = strcat(front,'.avi');
 startVort = 250;
 figure;
 if ~exist('plotVorticity')
-	plotVorticity = 1;  %plot Vorticity switch, default for 0 if not specified by user
+	plotVorticity = 0;  %plot Vorticity switch, default for 0 if not specified by user
 end
 
 X = simData{1,1};
@@ -23,7 +23,7 @@ if ~exist('plotTrace')
 end
 
 if plotTrace
-   maxTrace = 100;
+   maxTrace = 250;
    Tails = nan(maxTrace,2);
    [Tailx,tailIndex] = min(X(leader,1));
    Tails(1,:) = [X(tailIndex,1),X(tailIndex,2)];
@@ -56,11 +56,11 @@ for i = 1:sim_idx-1
  	 end
   end
   %Plot Flappers and Target points
-  plot(mod(X(leader,1),p.Lx),X(leader,2),'ko','MarkerSize',0.4)
+  plot(mod(X(leader,1),p.Lx),X(leader,2),'ko','MarkerSize',0.8)
   hold on
   
   if p.num_flappers > 1
-        plot(mod(X(follower,1),p.Lx),X(follower,2),'ro','MarkerSize',0.4)
+        plot(mod(X(follower,1),p.Lx),X(follower,2),'ro','MarkerSize',0.8)
   end
   
   
@@ -70,9 +70,9 @@ for i = 1:sim_idx-1
   
 
   
-  %get flux data
-  flux = sum(u_sim(xpoint,:,1));
-  meanFlux = flux/p.Ly;
+%   %get flux data
+%   flux = sum(u_sim(xpoint,:,1));
+%   meanFlux = flux/p.Ly;
   %Format Plot
   axis equal manual
   xlim([0 p.Lx]);
@@ -90,30 +90,30 @@ for i = 1:sim_idx-1
      else
             Tails(i,:) = [X(tailIndex,1),X(tailIndex,2)];
      end
-     plot(mod(Tails(:,1),p.Lx),Tails(:,2),'ko','MarkerSize',0.8)
+     plot(mod(Tails(:,1),p.Lx),Tails(:,2),'ko','MarkerSize',2)
       if p.num_flappers > 1
           if i > maxTrace
              Heads = [Heads(2:end,:); X(headIndex,1),X(headIndex,2)];
           else
               Heads(i,:) = [X(headIndex,1),X(headIndex,2)];
           end
-      plot(mod(Heads(:,1),p.Lx),Heads(:,2),'ro','MarkerSize',0.8)
+      plot(mod(Heads(:,1),p.Lx),Heads(:,2),'ro','MarkerSize',2)
      end
   end
-  
-  gap = Tail2Head(p,X);
-  Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K)),strcat(' Flappers:',num2str(p.num_flappers)),strcat(' Gap:',num2str(gap)),strcat(' Nb:',num2str(p.Nb)),strcat(' Freq:',num2str(p.freq))};
-text(0,0.5*p.Ly,Info);
-  
-  
- line([xline,xline],[0,p.Ly],'LineStyle','--')
- FluxText = ['Net Flux:' num2str(flux,4) ' at x=' num2str(xline)];
- text(xline, 0.05*p.Ly,FluxText);
- 
+%   
+%   gap = Tail2Head(p,X);
+%   Info = {strcat(' Time:',num2str(time,4)),strcat(' dt:',num2str(p.dt)),strcat(' h:',num2str(p.h)), strcat(' Nx-Ny:',num2str(p.Nx),'-',num2str(p.Ny)),strcat(' K:',num2str(p.K)),strcat(' Flappers:',num2str(p.num_flappers)),strcat(' Gap:',num2str(gap)),strcat(' Nb:',num2str(p.Nb)),strcat(' Freq:',num2str(p.freq))};
+% text(0,0.5*p.Ly,Info);
+%   
+%   
+%  line([xline,xline],[0,p.Ly],'LineStyle','--')
+%  FluxText = ['Net Flux:' num2str(flux,4) ' at x=' num2str(xline)];
+%  text(xline, 0.05*p.Ly,FluxText);
+%  
   if  ~mod(i,100)
       fprintf('Grabbing Frame %d \n',i)
   end
-      set(gcf,'Position',[0 0 1160 270]);
+%       set(gcf,'Position',[0 0 1160 270]);
       Frames(i) = getframe(gcf) ;
 %   drawnow
   hold off

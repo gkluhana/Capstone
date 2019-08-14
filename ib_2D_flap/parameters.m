@@ -32,7 +32,7 @@ if isempty(param_)
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=0.0005;
+    param_.tmax=0.005;
     param_.dt=0.00001;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     param_.snaptime= param_.tmax/(1000*param_.dt); %take 1000 snaps
@@ -54,13 +54,13 @@ if isempty(param_)
     
     
     %Initial position of flappers
-    param_.gappc = 6/2;
+    param_.gappc = 0;
     param_.gap = param_.gappc*param_.width;
     param_.Tail2Head = param_.gap-param_.width;
-    param_.leader_shift= -1*param_.Lx/4;
+    param_.leader_shift= 0;
     param_.xpos = 0:1:param_.num_flappers-1;
     param_.xcenter = param_.Lx/2 + param_.leader_shift - param_.gap*param_.xpos;
-    param_.lateralShiftFac = 0;
+    param_.lateralShiftFac = 2;
     param_.ycenter = [param_.Ly/2  param_.Ly/2+param_.lateralShiftFac*param_.amprel];
     
     param_.Free = 1;

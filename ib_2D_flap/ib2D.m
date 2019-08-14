@@ -25,9 +25,9 @@ end
     
 for clock=1:p.clockmax
     time = clock*p.dt;
-    XX=X+(p.dt/2)*interpB(p,u,X);
+    XX=X+(p.dt/2)*vec_interp(p,u,X);
     [F,T] = Force(p,XX,T); 
-    ff = spread(p,F,XX);
+    ff = vec_spread(p,F,XX);
     %Update Target Points
     if p.inPhase
         T(:,2) =Trest -  (0.5*p.amprel*sin(2*pi*p.freq*time));
@@ -36,7 +36,7 @@ for clock=1:p.clockmax
         T(follower,2) = Trest(follower) -  (p.ampfactor*0.5*p.amprel*sin(2*pi*p.freq*time - p.phi));
     end
     [u,uu]=fluid(p,u,ff);
-    X=X+p.dt*interpB(p,uu,XX);
+    X=X+p.dt*vec_interp(p,uu,XX);
  
  if ~mod(clock,p.snaptime)
     simData(sim_idx,:) = [ {X} , {T} ,{time},{u} ,{F}];

@@ -8,6 +8,7 @@ num_flappers=param.num_flappers;
 
 c=param.c;
 f=zeros(Nx,Ny,2);
+
 for k=1:Nb*num_flappers
   s=X(k,:)/h;
   i=floor(s);
