@@ -37,7 +37,7 @@ freq   = 3
 num_flappers= 2
 X = zeros(num_flappers*Nb,2);
 T = zeros(num_flappers*Nb,2);
-
+W = zeros(Nb,2); 
 
 %Jukowski Airfoils with Target Points with center (xcetner, ycenter) and chord length w
 w = L/2;

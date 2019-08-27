@@ -14,27 +14,34 @@ u = init_fluid(p);
 %Check Initial Configuration of system
 % plotConfig(p,X,T,u);
 
+%Flapper Rest Position
 Trest = T(:,2);
-sim_idx = 1;
-simData = cell(ceil(p.clockmax/p.snaptime),5);
-num_frames = 0;
+
+%Flapper Indices
 leader = 1:p.Nb;
 if p.num_flappers >1
     follower = p.Nb+1 : size(X,1);
 end
-    
+
+% %Floor
+[X,T] =  wall(p,X,T);                  %Floor
+
+%Simulation Parameters
+sim_idx = 1;
+simData = cell(ceil(p.clockmax/p.snaptime),5);
+num_frames = 0;
+
 for clock=1:p.clockmax
     time = clock*p.dt;
     XX=X+(p.dt/2)*vec_interp(p,u,X);
     [F,T] = Force(p,XX,T); 
     ff = vec_spread(p,F,XX);
+    
     %Update Target Points
-    if p.inPhase
-        T(:,2) =Trest -  (0.5*p.amprel*sin(2*pi*p.freq*time));
-    else
-        T(leader,2) = Trest(leader) -  (0.5*p.amprel*sin(2*pi*p.freq*time));
-        T(follower,2) = Trest(follower) -  (p.ampfactor*0.5*p.amprel*sin(2*pi*p.freq*time - p.phi));
-    end
+    T(leader,2) = Trest(leader) -  (0.5*p.amprel*sin(2*pi*p.freq*time));
+    T(follower,2) = Trest(follower) -  (p.ampfactor*0.5*p.amprel*sin(2*pi*p.freq*time - p.phi));
+    
+    
     [u,uu]=fluid(p,u,ff);
     X=X+p.dt*vec_interp(p,uu,XX);
  
