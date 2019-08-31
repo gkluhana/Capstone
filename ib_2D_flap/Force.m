@@ -13,12 +13,8 @@ if Free
 	follower = p.Nb+1:p.Nb*(p.num_flappers) ;
 	E = zeros(size(X,1),size(X,2),p.num_flappers);
     
-	if leaderFree
         E(leader,  1,1)  = 1;
-	end
-    if followerFree|followerConstant	
         E(follower,1,2)  = 1;
-	end
 end
 %Check for a wall
 

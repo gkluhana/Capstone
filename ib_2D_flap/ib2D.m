@@ -20,7 +20,7 @@ Trest = T(:,2);
 %Flapper Indices
 leader = 1:p.Nb;
 if p.num_flappers >1
-    follower = p.Nb+1 : size(X,1);
+    follower = p.Nb+1 : p.Nb*p.num_flappers;
 end
 
 % %Floor
