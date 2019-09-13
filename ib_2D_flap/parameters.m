@@ -24,8 +24,8 @@ if isempty(param_)
     %Boundary
     param_.Nb=ceil(pi*(param_.Lx/2)/(param_.h/2));
     param_.dtheta=2*pi/param_.Nb;
-    param_.kp=[(2:param_.Nb),1];
-    param_.km=[param_.Nb,(1:(param_.Nb-1))];
+    param_.kp=[(2:param_.Nb),1];         %Indices for second difference formulas
+    param_.km=[param_.Nb,(1:(param_.Nb-1))]; %Not used currently
     param_.K=9000*10000;
     param_.rho=1;
     param_.mu=2;
@@ -39,6 +39,8 @@ if isempty(param_)
     
     %Flappers
     param_.num_flappers =2;
+    param_.leader= 1:param_.Nb
+    param_.follower=param_.Nb+1:param_.Nb+param_.Nb*(param_.num_flappers-1)
     param_.width = 4*param_.L;
     
     %Prescribed motion parameters for flappers
@@ -47,8 +49,6 @@ if isempty(param_)
     param_.freq   = 4;          %Frequency
     param_.phi = 0;             %Phase
     param_.ampfactor= 0.5;      %A_follower/A_leader
-    param_.floor = 1;
-    
     
     %Initial position of flappers
     param_.gap = 10;
@@ -64,7 +64,12 @@ if isempty(param_)
     param_.followerFree= 1;
     param_.followerConstant= 0;
 
-    %Floor
+    %Floor Wall and Indices
+    param_.wall = 1;
+    if param_.wall
+        param_.wallNb = ceil(2*param_.Lx/param_.h)
+    end
+   
     
 end
 % if nargin > 0 

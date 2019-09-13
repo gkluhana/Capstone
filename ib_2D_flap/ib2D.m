@@ -1,6 +1,5 @@
-% ib2D.m
+% ib2D.m for flappers
 % This script is the main program.
-
 close all
 clear
 clc
@@ -8,7 +7,7 @@ clc
 %Initialize parameters
 p = parameters()
 p.a = init_a(p);            %matrix
-[X,T] = flappers(p);        %[Boundary Points, Target Points]
+[X,T] = flappers(p);        %[X = Boundary Points,T = Target Points]
 u = init_fluid(p);          
 
 %Check Initial Configuration of system
@@ -17,15 +16,8 @@ u = init_fluid(p);
 %Flapper Rest Position
 Trest = T(:,2);
 
-%Flapper Indices
-leader = 1:p.Nb;
-if p.num_flappers >1
-    follower = p.Nb+1 : p.Nb*p.num_flappers;
-end
-
 % %Floor
 [X,T] =  wall(p,X,T);                  %Floor
-
 %Simulation Parameters
 sim_idx = 1;
 simData = cell(ceil(p.clockmax/p.snaptime),5);
@@ -38,8 +30,8 @@ for clock=1:p.clockmax
     ff = vec_spread(p,F,XX);
     
     %Update Target Points
-    T(leader,2) = Trest(leader) -  (0.5*p.amprel*sin(2*pi*p.freq*time));
-    T(follower,2) = Trest(follower) -  (p.ampfactor*0.5*p.amprel*sin(2*pi*p.freq*time - p.phi));
+    T(p.leader,2) = Trest(p.leader) -  (0.5*p.amprel*sin(2*pi*p.freq*time));
+    T(p.follower,2) = Trest(p.follower) -  (p.ampfactor*0.5*p.amprel*sin(2*pi*p.freq*time - p.phi));
     
     
     [u,uu]=fluid(p,u,ff);
