@@ -22,7 +22,6 @@ end
 if p.followerConstant %Follower deviates the same as leader
  	T = T+D(1)*E(:,:,2);
 end
-
 %Compute Force
 F = -p.K*(X-T);
 

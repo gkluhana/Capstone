@@ -1,4 +1,4 @@
-function U=vec_interp(p,u,X)
+function U=vec_interp(t,p,u,X)
 % interpolate fluid velocity to the body
 % global Nb h;
 % global N;
@@ -14,9 +14,9 @@ i=floor(s);
 r=s-i;
 w=vec_phi1(r(:,1)).*vec_phi2(r(:,2)); %Evaluate delta function
 w = permute(w, [1,3,2]); %Reogranize, this is quite fast
-num_flappers=p.num_flappers;
 
 for k = 1:size(X,1)
+
   i1=mod((i(k,1)-1):(i(k,1)+2),Nx)+1; % Find adjacent fluid cells
   i2=mod((i(k,2)-1):(i(k,2)+2),Ny)+1;
   

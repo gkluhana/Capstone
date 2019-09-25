@@ -7,7 +7,7 @@ if isempty(param_)
     param_.Ly = 27*param_.L;
     
     %Grid Parameters
-    param_.N=10;
+    param_.N=1;
     param_.h=param_.L/param_.N;
     param_.Nx = param_.Lx/param_.h;
     param_.Ny = param_.Ly/param_.h;
@@ -26,14 +26,14 @@ if isempty(param_)
     param_.dtheta=2*pi/param_.Nb;
     param_.kp=[(2:param_.Nb),1];         %Indices for second difference formulas
     param_.km=[param_.Nb,(1:(param_.Nb-1))]; %Not used currently
-    param_.K=9e7;
+    param_.K=2e9;
     param_.rho=1;
     param_.mu=2;
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
     param_.tmax=5;
-    param_.dt=0.0005;
+    param_.dt=0.00005;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     param_.snaptime= param_.tmax/(1000*param_.dt); %take 1000 snaps
     
@@ -68,6 +68,7 @@ if isempty(param_)
     param_.wall = 1;
     if param_.wall
         param_.wallNb = ceil(2*param_.Lx/param_.h)
+        param_.wallc = param_.Lx/param_.wallNb;
     end
    
     

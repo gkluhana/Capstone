@@ -22,10 +22,14 @@ Trest = T(:,2);
 sim_idx = 1;
 simData = cell(ceil(p.clockmax/p.snaptime),5);
 num_frames = 0;
-
 for clock=1:p.clockmax
+    plot(X(:,1),X(:,2),'o')
+    hold on
+    plot(T(:,1),T(:,2),'or')
+    hold off
+    drawnow
     time = clock*p.dt;
-    XX=X+(p.dt/2)*vec_interp(p,u,X);
+    XX=X+(p.dt/2)*vec_interp(time,p,u,X);
     [F,T] = Force(p,XX,T); 
     ff = vec_spread(p,F,XX);
     
@@ -35,7 +39,7 @@ for clock=1:p.clockmax
     
     
     [u,uu]=fluid(p,u,ff);
-    X=X+p.dt*vec_interp(p,uu,XX);
+    X=X+p.dt*vec_interp(time, p,uu,XX);
  
  if ~mod(clock,p.snaptime)
     simData(sim_idx,:) = [ {X} , {T} ,{time},{u} ,{F}];
