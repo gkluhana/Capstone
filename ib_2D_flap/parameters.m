@@ -26,14 +26,14 @@ if isempty(param_)
     param_.dtheta=2*pi/param_.Nb;
     param_.kp=[(2:param_.Nb),1];         %Indices for second difference formulas
     param_.km=[param_.Nb,(1:(param_.Nb-1))]; %Not used currently
-    param_.K=9000*10000;
+    param_.K=9e7;
     param_.rho=1;
     param_.mu=2;
     param_.c=param_.dtheta/(param_.h*param_.h);
 
     %Time
-    param_.tmax=20;
-    param_.dt=0.00001;
+    param_.tmax=5;
+    param_.dt=0.0005;
     param_.clockmax=ceil(param_.tmax/param_.dt);
     param_.snaptime= param_.tmax/(1000*param_.dt); %take 1000 snaps
     
@@ -48,7 +48,7 @@ if isempty(param_)
     param_.amprel = param_.AoverC*param_.width;
     param_.freq   = 4;          %Frequency
     param_.phi = 0;             %Phase
-    param_.ampfactor= 0.5;      %A_follower/A_leader
+    param_.ampfactor= 1;      %A_follower/A_leader
     
     %Initial position of flappers
     param_.gap = 10;

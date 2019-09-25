@@ -14,7 +14,7 @@ end
 X = simData{1,1};
 leader = 1:p.Nb;
 if p.num_flappers > 1
-    follower = p.Nb+1 :size(X,1);
+    follower = p.Nb+1 :p.Nb*p.num_flappers;
 end
 
 %Trace
@@ -62,7 +62,12 @@ for i = 1:sim_idx-1
   if p.num_flappers > 1
         plot(mod(X(follower,1),p.Lx),X(follower,2),'ro','MarkerSize',0.8)
   end
-  
+
+  if size(X,1) > p.Nb*p.num_flappers
+	wall= p.Nb*p.num_flappers+1:p.Nb*p.num_flappers+p.Nb;
+ 	plot(mod(X(wall,1),p.Lx),mod(X(wall,2),p.Ly),'bo','MarkerSize',0.8)
+        plot(mod(T(wall,1),p.Lx),mod(T(wall,2),p.Ly),'gx','MarkerSize',0.8)
+  end
   
 %  for j =1:p.num_flappers
 %     plot(mod(T((j-1)*p.Nb+1:j*p.Nb,1),p.Lx),T((j-1)*p.Nb+1:j*p.Nb,2),'bo','MarkerSize',0.8)
